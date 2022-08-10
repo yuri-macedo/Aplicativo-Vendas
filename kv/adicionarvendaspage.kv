@@ -1,0 +1,117 @@
+<AdicionarVendasPage>:
+    FloatLayout:
+        canvas:
+            Rectangle:
+                size: self.size
+                pos: self.pos
+                source: "icones/bg1.png"
+
+        #Selecionar Cliente
+        Label:
+            pos_hint: {"right":1, "top":1}
+            size_hint: 1, 0.05
+            text: "Selecione o Cliente"
+            id: id_label_cliente
+        ScrollView:
+            pos_hint: {"right":1, "top":0.95}
+            size_hint: 1, 0.15
+            GridLayout:
+                rows: 1
+                id: id_lista_clientes
+                size_hint_x: None
+                width: self.minimum_width
+                col_default_width: "100dp"
+                col_force_default: True
+
+        #Selecionar Produto
+        Label:
+            pos_hint: {"right":1, "top":0.75}
+            size_hint: 1, 0.05
+            text: "Selecione o Produto"
+            id: id_label_produto
+        ScrollView:
+            pos_hint: {"right":1, "top":0.7}
+            size_hint: 1, 0.15
+            GridLayout:
+                rows: 1
+                id: id_lista_produtos
+                size_hint_x: None
+                width: self.minimum_width
+                col_default_width: "100dp"
+                col_force_default: True
+
+        #Data
+        Label:
+            id: id_data
+            pos_hint: {"right":1, "top":0.5}
+            size_hint: 1, 0.05
+            bold: True
+            text: "Data: 01/01/2022"
+
+        #Unidade de Medida
+        GridLayout:
+            rows: 1
+            pos_hint: {"right":0.9, "top":0.45}
+            size_hint: 0.8, 0.1
+            LabelButton:
+                text: "kg"
+                id: id_kg
+                on_release: app.selecionar_unidade("id_kg")
+            LabelButton:
+                text: "unidades"
+                id: id_unidades
+                on_release: app.selecionar_unidade("id_unidades")
+            LabelButton:
+                text: "litros"
+                id: id_litros
+                on_release: app.selecionar_unidade("id_litros")
+
+        #Botão Cancelar
+        LabelButton:
+            canvas.before:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: "icones/botao.png" if self.state=="normal" else "icones/botao_apertado.png"
+            text: "Cancelar"
+            on_release: app.mudar_tela("homepage")
+            pos_hint: {"right":0.45, "top":0.2}
+            size_hint: 0.4, 0.2
+
+        #Botao Adicionar
+        LabelButton:
+            canvas.before:
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+                    source: "icones/botao.png" if self.state=="normal" else "icones/botao_apertado.png"
+            text: "Adicionar"
+            on_release: app.adicionar_produto()
+            pos_hint: {"right":0.95, "top":0.2}
+            size_hint: 0.4, 0.2
+
+        #Preço Total
+        GridLayout:
+            rows: 1
+            pos_hint: {"right":0.9, "top":0.355}
+            size_hint: 0.8, 0.075
+            Label:
+                text: "Preço Total (R$)"
+                id: id_label_preco
+            TextInput:
+                id: id_preco_total
+                hint_text: "Digite apenas os números"
+
+        #Quantidade
+        GridLayout:
+            rows: 1
+            pos_hint: {"right":0.9, "top":0.275}
+            size_hint: 0.8, 0.075
+            Label:
+                text: "Quantidade Total"
+                id: id_label_quantidade
+            TextInput:
+                id: id_quantidade
+                hint_text: "0"
+
+
