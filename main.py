@@ -135,6 +135,7 @@ class MainApp(App):
     def mudar_foto_perfil(self,foto,*args):
         foto_perfil = self.root.ids["id_foto_perfil"]
         foto_perfil.source=f"icones/fotos_perfil/{foto}"
+        self.avatar=foto
 
         requisicao = requests.patch(f"https://aplicativovendashash-f2533-default-rtdb.firebaseio.com/{self.local_id}.json?auth={self.token_id}",
                                     data=f'{{"avatar":"{foto}"}}')

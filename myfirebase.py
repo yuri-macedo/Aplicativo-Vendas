@@ -24,9 +24,10 @@ class MyFirebase():
             with open("refreshtoken.txt","w") as arquivo:
                 arquivo.write(refreshtoken)
 
-            req_id=requests.get(f"https://aplicativovendashash-f2533-default-rtdb.firebaseio.com/.json?auth={meu_app.idtoken}")
-            req_id_dic=req_id.json()
-            id_vendedor=req_id_dic["proximo_id_vendedor"]
+
+            req_id=requests.get(f"https://aplicativovendashash-f2533-default-rtdb.firebaseio.com/proximo_id_vendedor.json?auth={meu_app.idtoken}")
+            id_vendedor=req_id.json()
+            print(id_vendedor)
 
             link=f"https://aplicativovendashash-f2533-default-rtdb.firebaseio.com/{local_id}.json?auth={meu_app.idtoken}"
             info=f'{{"avatar":"foto1.png","equipe":"","total_vendas":"0","vendas":"","id_vendedor":"{id_vendedor}"}}'
@@ -34,7 +35,7 @@ class MyFirebase():
 
             proximo_id_vendedor=int(id_vendedor)+1
             prox_id=f'{{"proximo_id_vendedor":"{proximo_id_vendedor}"}}'
-            requests.patch("https://aplicativovendashash-f2533-default-rtdb.firebaseio.com/.json?auth={meu_app.idtoken}",data=prox_id)
+            requests.patch(f"https://aplicativovendashash-f2533-default-rtdb.firebaseio.com/.json?auth={meu_app.idtoken}",data=prox_id)
 
             meu_app.carregar_info_usuario()
             meu_app.mudar_tela("homepage")
